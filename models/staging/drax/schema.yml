@@ -1,0 +1,10 @@
+
+version: 2
+
+sources:
+  - name: drax
+    description: "Drax Power - Electricity usage for the Sheffield factory."
+    database: merrychef-dw  
+    schema: drax  
+    tables:
+      - name: airbyte_electricity
