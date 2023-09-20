@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_drax__electricity
+    columns:
+      - name: timestamp
+        tests:
+          - unique
+          - not_null
+      - name: date
+      - name: half_hour
+      - name: kwh
