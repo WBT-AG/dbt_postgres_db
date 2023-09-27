@@ -46,4 +46,4 @@ models:
     marts:
       +enabled: true
       +materialized: table
-      +schema: utilities
+      +schema: marts

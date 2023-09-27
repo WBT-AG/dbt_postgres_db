@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_gocardless__payments
+    columns:
+      - name: status
+        tests:
+          - not_null
+      - name: created_date
+      - name: charge_date
+      - name: ammount 
+      - name: currency
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_gocardless__payouts
+    columns:
+      - name: status
+        tests:
+          - not_null
+      - name: created_date
+      - name: arrival_date
+      - name: net_ammount 
+      - name: deducted_fees
+      - name: id
+        tests:
+          - not_null
+          - unique

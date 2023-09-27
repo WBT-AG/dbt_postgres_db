@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: electricity
+  - name: sheffield_electricity
     columns:
       - name: timestamp
         tests:

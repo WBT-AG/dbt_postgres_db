@@ -1,0 +1,12 @@
+
+version: 2
+
+sources:
+  - name: ga4
+    description: "Google Analitics 4 - Web stats for merrycef.com"
+    database: merrychef-dw  
+    schema: ga4  
+    tables:
+      - name: airbyte_pages
+      - name: airbyte_daily_active_users
+      - name: airbyte_website_overview

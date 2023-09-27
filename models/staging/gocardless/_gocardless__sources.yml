@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: gocardless
+    description: "GoCardless payment and payout details"
+    database: merrychef-dw  
+    schema: gocardless  
+    tables:
+      - name: airbyte_payments
+      - name: airbyte_payouts
