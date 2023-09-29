@@ -1,5 +1,9 @@
-WITH daily_page_views AS (
-    SELECT * FROM {{ ref('stg_ga4__page_views') }}
+WITH gocardless_payouts AS (
+    SELECT 
+        *,
+        'gocardless' as source
+    FROM {{ ref('stg_gocardless__payouts') }}
 )
 
-SELECT * from daily_page_views
+
+SELECT * from gocardless_payouts

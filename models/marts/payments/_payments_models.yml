@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: card_payments
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+      - name: status
+        tests:
+          - not_null
+      - name: created_date
+      - name: charge_date
+      - name: ammount 
+      - name: currency
+      - name: source
+
+  - name: card_payouts
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+      - name: status
+        tests:
+          - not_null
+      - name: created_date
+      - name: charge_date
+      - name: ammount 
+      - name: currency
+
+    relationships:
+      - from: card_payments
+        to: dim_date
+        field: created_date
+        to_field: date
+      - from: card_payments
+        to: dim_date
+        field: charge_date
+        to_field: date
