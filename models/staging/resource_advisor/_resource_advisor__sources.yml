@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: resource_advisor
+    description: "resource_advisor output"
+    database: merrychef-dw  
+    schema: resource_advisor  
+    tables:
+      - name: airbyte_gas_usage
+      - name: airbyte_electricity_usage

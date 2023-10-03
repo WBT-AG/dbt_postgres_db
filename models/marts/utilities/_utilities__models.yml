@@ -1,14 +1,5 @@
 version: 2
 
 models:
-  - name: sheffield_electricity
-    columns:
-      - name: timestamp
-        tests:
-          - unique
-          - not_null
-      - name: date
-      - name: half_hour
-      - name: kwh
-        tests:
-          - not_null
+  - name: sheffield_utilities
+    #columns:

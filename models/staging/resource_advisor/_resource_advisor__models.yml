@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_resource_advisor__gas_usage
+    columns:
+      - name: usage
+      - name: measure
+      - name: cost
+      - name: currency
+      - name: month
+
+  - name: stg_resource_advisor__electricity_usage
+    columns:
+      - name: usage
+      - name: measure
+      - name: cost
+      - name: currency
+      - name: month
