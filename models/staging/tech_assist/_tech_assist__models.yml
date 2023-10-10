@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_tech_assist__chat_sessions
+    columns:
+      - name: usage
+
+
+  - name: stg_tech_assist__conversation_logs
+    columns:
+      - name: usage

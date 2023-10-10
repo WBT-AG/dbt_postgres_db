@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: tech_assist
+    description: "todo"
+    database: merrychef-dw  
+    schema: tech_assist  
+    tables:
+      - name: airbyte_merrychef_conversation_logs_view
+      - name: airbyte_merrychef_chat_sessions_view

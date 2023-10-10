@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_resource_advisor__gas_usage
+  - name: stg_resource_advisor__gas_uasge
     columns:
       - name: usage
       - name: measure

@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_ga__daily_page_views
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: base_url
+      - name: path
+      - name: view 
+      - name: bouncerate

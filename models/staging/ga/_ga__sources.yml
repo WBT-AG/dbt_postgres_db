@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: ga
+    description: "Google Analitics (Universal) - Web stats for merrychef.com"
+    database: merrychef-dw  
+    schema: ga  
+    tables:
+      - name: airbyte_pages
+      - name: airbyte_locations
