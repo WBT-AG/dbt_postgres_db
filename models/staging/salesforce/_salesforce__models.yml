@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: stg_salesforce_claims
+    columns:
+      - name: claim_id

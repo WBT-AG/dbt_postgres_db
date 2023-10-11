@@ -1,0 +1,10 @@
+
+version: 2
+
+sources:
+  - name: salesforce
+    description: "Salesfoce claims data"
+    database: merrychef-dw  
+    schema: salesforce
+    tables:
+      - name: airbyte_claim__c
