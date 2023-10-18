@@ -3,3 +3,4 @@ version: 2
 models:
   - name: chatbot_usage
     #columns:
+  - name: claim_details

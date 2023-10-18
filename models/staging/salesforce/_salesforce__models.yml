@@ -1,6 +1,13 @@
 version: 2
 
 models:
-  - name: stg_salesforce_claims
+  - name: stg_salesforce__claims
     columns:
       - name: claim_id
+  - name: stg_salesforce__warranty_registrations
+    columns:
+      - name: registration_id
+  - name: stg_salesforce__service_lines
+    columns:
+      - name: service_line_id
+      

@@ -103,8 +103,7 @@ final AS (
         sc.requested_labor__c as requested_labor,
         sc.requested_parts__c as requested_parts_value,
         sc.sent_to_erp__c as sent_to_erp,
-        sc.serial_number__c as serial_number,
-        sc.serial_search__c as serial_search,
+        sc.serial_search__c as serial_number,
         sc.service_authorization__c as service_authorisation,
         sc.service_company__c as service_company,
         sc.service_company_leased_product__c as service_company_leased_asset,
@@ -134,11 +133,18 @@ final AS (
         sc.warranty_registration__c as warranty_registration,
         sc.welbilt_asset_brand__c as welbilt_asset_brand,
         sc.welbilt_brand__c as welbilt_brand_id,
-        sc.legacy_id__c as legacy_id
+        sc.legacy_id__c as legacy_id,
+        CAST(
+            CASE
+                WHEN LENGTH(sc.serial_search__c) = 13 AND
+                    sc.serial_search__c ~ '^[0-9]+$'
+                THEN sc.serial_search__c
+                ELSE NULL
+            END as VARCHAR
+        ) as serial_number_cleaned
     FROM salesforce_claims sc
     WHERE sc.welbilt_asset_brand__c = 'MERRYCHEF'
 )
-
 
 -- Select * from Final CTE
 SELECT * FROM final
