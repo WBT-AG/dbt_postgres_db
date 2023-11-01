@@ -1,0 +1,19 @@
+
+version: 2
+
+sources:
+  - name: tesseract
+    description: "Tesseract Service Call data"
+    database: merrychef-dw  
+    schema: tesseract
+    tables:
+      - name: airbyte_scser
+      - name: airbyte_screp
+      - name: airbyte_scprod
+      - name: airbyte_scpart
+      - name: airbyte_scfsrl
+      - name: airbyte_scfsr
+      - name: airbyte_scfault
+      - name: airbyte_sccust
+      - name: airbyte_sccall
+      

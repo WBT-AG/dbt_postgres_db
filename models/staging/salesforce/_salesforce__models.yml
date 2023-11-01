@@ -10,4 +10,7 @@ models:
   - name: stg_salesforce__service_lines
     columns:
       - name: service_line_id
+  - name: stg_salesforce__asset
+    columns:
+      - name: asset_id
       

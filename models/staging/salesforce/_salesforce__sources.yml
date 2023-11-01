@@ -10,3 +10,4 @@ sources:
       - name: airbyte_claim__c
       - name: airbyte_warranty_registration__c
       - name: airbyte_service_incident_line__c
+      - name: airbyte_asset

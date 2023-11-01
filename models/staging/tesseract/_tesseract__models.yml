@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: stg_tesseract__services
+  - name: stg_tesseract__repair_types
+
+
+      
