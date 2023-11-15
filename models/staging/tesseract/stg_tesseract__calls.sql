@@ -4,7 +4,7 @@ WITH tesseract_calls AS (
 
 final AS (
     SELECT
-        ca.call_adate as a_date,
+        ca.call_adate::TIMESTAMPTZ::DATE as a_date,
         ca.call_appointment_date as appointment_date,
         ca.call_area_code as area_code,
         ca.call_callsubstatus_code as substatus_code,

@@ -4,4 +4,5 @@ models:
   - name: chatbot_usage
     #columns:
   - name: claim_details
+  - name: service_issues
     #- name: service_calls
