@@ -10,7 +10,7 @@
     CASE
         WHEN LENGTH({{ model_number }}) = 16 AND
              LEFT({{ model_number }}, 1) ~ '^[A-Za-z]' THEN
-            LEFT({{ model_number }}, 2)
+            LEFT({{ model_number }}, 3)
         ELSE NULL
     END
 {% endmacro %}
@@ -225,4 +225,18 @@
         ELSE NULL
     END
 {% endmacro %}
+
+{% macro classify_model_number(model_number) %}
+    CASE
+        WHEN {{ model_number }} ~ '^MC' OR 
+        {{ model_number }} ~ '^MD' OR
+        {{ model_number }} ~ '^X1' OR
+        {{ model_number }} ~ '^E' THEN
+        'Merrychef'
+        ELSE NULL
+    END
+{% endmacro %}
+
+
+
 
