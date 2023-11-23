@@ -28,7 +28,7 @@ final AS (
         ca.call_problem as problem_description,
         ca.call_prod_num as model_number,
         ca.call_prodfamily_code as product_family_code,
-        ca.call_rdate as r_date,
+        ca.call_rdate::TIMESTAMPTZ::DATE as r_date,
         ca.call_ref2 as ref_2,
         ca.call_req_count as req_type,
         ca.call_res_code as reson_code,

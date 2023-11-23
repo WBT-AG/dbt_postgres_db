@@ -35,7 +35,7 @@ tesseract_calls AS (
         call_number as id,
         'Tesseract' as system,
         status,
-        a_date as submission_date,
+        r_date as submission_date,
         country_code as country,
         site_county as state_province,
         site_town as city,
