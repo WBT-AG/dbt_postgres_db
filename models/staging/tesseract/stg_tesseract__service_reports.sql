@@ -27,7 +27,8 @@ final AS (
         sr.fsr_travel_time as trave_time,
         sr.fsr_type_name as type_name,
         sr.fsr_user as user,
-        sr.fsr_work_time as work_time
+        sr.fsr_work_time as work_time,
+        {{ classify_model_number('sr.fsr_prod_num') }} AS model_brand
     FROM tesseract_service_reports sr
 )
 

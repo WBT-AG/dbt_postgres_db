@@ -70,7 +70,7 @@ final AS (
         sc.location_sub_region__c as location_sub_region,
         sc.manufacturing_plant__c as manufacturing_plant,
         sc.serial_number_text__c as mcf_serial_number,
-        sc.model_item_number__c as model_item_number,
+        upper(sc.model_item_number__c) as model_item_number,
         sc.non_serialized_item__c as non_serialised_item,
         sc.non_serialized_reason__c as non_serialized_reason,
         sc.non_serialized_reason_other__c as non_serialized_reason_other,

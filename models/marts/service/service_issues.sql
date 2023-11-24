@@ -49,6 +49,7 @@ tesseract_field_reports AS (
     SELECT
         call_number as id,
         complete_date as repair_date,
+        model_brand,
         solution as summary
     FROM {{ ref('stg_tesseract__service_reports') }}
 ),
@@ -69,13 +70,22 @@ tesseract_calls_full AS (
         tr.repair_date
     FROM tesseract_calls tc
     LEFT JOIN tesseract_field_reports tr ON tc.id = tr.id
+    WHERE tr.model_brand = 'Merrychef'
 ),
 
--- Final CTE
-final AS (
+-- Merge Tesseract & CPS Data
+all_issues AS (
     SELECT * FROM cps_claims_full
     UNION ALL
     SELECT * FROM tesseract_calls_full
+),
+
+final AS (
+    select *,
+    {{ extract_model_range('ai.model_number') }} AS model_range,
+    {{ extract_model_variant('ai.model_number') }} AS model_variant,
+    {{  serial_build_date('ai.serial_number') }} AS model_build_date
+    FROM all_issues ai
 )
 
 -- Final Select Statement
