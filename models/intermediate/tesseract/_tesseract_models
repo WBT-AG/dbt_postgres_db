@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: int_tesseract_claims
+    #columns:
+  - name: int_tesseract_assets
+  - name: int_tesseract_claim_faults
+  - name: int_tesseract_claim_parts

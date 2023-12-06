@@ -6,14 +6,31 @@
     {%- endif -%}
 {%- endmacro %}
 
+{% macro is_valid_model_number(model_number) %}
+    CASE
+        WHEN LENGTH({{ model_number }}) = 16 AND {{ model_number }} ~ '^[EX]' THEN 
+            True
+        WHEN LENGTH({{ model_number }}) = 14 AND {{ model_number }} ~ '^E' THEN
+            True
+        WHEN LENGTH({{ model_number }}) = 11 AND {{ model_number }} ~ '^M' THEN
+            True
+        ELSE 
+            False
+    END
+{%- endmacro %}
+
 {% macro extract_model_range(model_number) %}
     CASE
         WHEN LENGTH({{ model_number }}) = 16 AND
-             LEFT({{ model_number }}, 1) ~ '^[A-Za-z]' THEN
+            LEFT({{ model_number }}, 1) ~ '^[A-Za-z]' THEN
             LEFT({{ model_number }}, 3)
+        WHEN LENGTH({{ model_number }}) = 11 AND
+            LEFT({{ model_number }}, 2) ~ '^[A-Za-z]' THEN
+            LEFT({{ model_number }}, 2)
         ELSE NULL
     END
 {% endmacro %}
+
 
 {% macro extract_model_variant(model_number) %}
     CASE
@@ -228,15 +245,15 @@
 
 {% macro classify_model_number(model_number) %}
     CASE
-        WHEN {{ model_number }} ~ '^MC' OR 
+        WHEN
+        {{ model_number }} ~ '-' THEN
+        NULL
+        WHEN 
+        {{ model_number }} ~ '^MC' OR 
         {{ model_number }} ~ '^MD' OR
         {{ model_number }} ~ '^X1' OR
-        {{ model_number }} ~ '^E' THEN
+        {{ model_number }} ~ '^E\d' THEN
         'Merrychef'
         ELSE NULL
     END
 {% endmacro %}
-
-
-
-

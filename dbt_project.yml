@@ -53,3 +53,15 @@ models:
         sql: "SELECT pg_size_pretty(pg_database_size('merrychef-dw')) AS database_size;"
         transaction: false
 
+    intermediate:
+      +enabled: true
+      +materialized: view
+      +schema: intermediate
+
+    exports:
+      +enabled: true
+      +materialized: table
+      +schema: exports
+      
+
+

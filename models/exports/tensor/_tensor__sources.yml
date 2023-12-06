@@ -1,0 +1,18 @@
+
+version: 2
+
+sources:
+  - name: tensor
+    description: "Tensor HR Management System"
+    database: merrychef-dw  
+    schema: tensor  
+    tables:
+      - name: airbyte_basicdetail
+      - name: airbyte_country
+      - name: airbyte_department
+      - name: airbyte_employee
+      - name: airbyte_employmentdetails
+      - name: airbyte_position
+      - name: airbyte_site
+      - name: airbyte_fixedcontrolitem
+      - name: airbyte_vssmsupervisor

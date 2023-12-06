@@ -61,6 +61,7 @@ final AS (
         sc.interface_region__c as interface_region,
         sc.invoice_date__c as invoice_date,
         sc.invoice_number__c as invoice_number,
+        upper(sc.item_number__c) as model_number,
         sc.item_description__c as item_description,
         sc.lastactivitydate as last_activity_date,
         sc.lastmodifieddate as last_modified_date,
@@ -143,7 +144,7 @@ final AS (
             END as VARCHAR
         ) as serial_number_cleaned
     FROM salesforce_claims sc
-    WHERE sc.welbilt_asset_brand__c = 'MERRYCHEF'
+    WHERE sc.welbilt_asset_brand__c = 'MERRYCHEF' OR sc.welbilt_asset_brand__c = 'Merrychef'
 )
 
 -- Select * from Final CTE

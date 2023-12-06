@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: int_salesforce_claims
+    #columns:
+  - name: int_salesforce_assets
+  - name: int_salesforce_claim_faults
+  - name: int_salesforce_claim_parts
