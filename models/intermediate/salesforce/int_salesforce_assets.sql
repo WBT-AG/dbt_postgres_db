@@ -5,8 +5,8 @@ WITH claims AS (
 assets AS (
     SELECT
         serial_number,
-        model_number,
-        upper(asset_location_country) as country
+        model_number
+        --upper(asset_location_country) as country
     FROM claims c
 ),
 
@@ -19,7 +19,9 @@ asset_details AS (
         {{  serial_build_site('a.serial_number') }} as build_site,
         {{  extract_model_range('a.model_number') }} as range,
         {{  extract_model_variant('a.model_number') }} as variant,
-        {{  extract_voltage('a.model_number') }} as voltage
+        {{  extract_voltage('a.model_number') }} as voltage,
+        {{  extract_model_customer('a.model_number') }} as model_customer,
+        {{  extract_model_country('a.model_number') }} as model_country
     FROM assets a
 ),
 

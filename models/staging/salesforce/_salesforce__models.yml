@@ -13,4 +13,6 @@ models:
   - name: stg_salesforce__asset
     columns:
       - name: asset_id
+  - name: stg_salesforce__parts
+
       

@@ -7,7 +7,9 @@ WITH employees AS (
         departmentid,
         siteid,
         employmentenddate,
-        employmenttype
+        employmenttype,
+        companyid,
+        employeecode
     FROM {{ source('tensor', 'airbyte_employee')}} 
 ),
 
@@ -61,6 +63,13 @@ positions AS (
     FROM {{ source('tensor', 'airbyte_position')}} 
 ),
 
+company AS (
+    SELECT
+        companyid,
+        companyname
+    FROM {{ source('tensor', 'airbyte_company')}} 
+),
+
 supervisor AS (
     SELECT
         employeeid,
@@ -70,7 +79,7 @@ supervisor AS (
 
 final AS (
     SELECT
-        em.employeeid as EmployeeID,
+        em.employeecode as EmployeeCode,
         em.firstname as FirstName,
         em.lastname as LastName,
         left(em.middlename,1) as MiddleInitial,
@@ -81,6 +90,7 @@ final AS (
         fi.controlvalue as AssignmentType,
         si.sitecode as LocationCode,
         co.countrycode as CountryCode,
+        cp.companyname as CompanyName,
         CASE
             WHEN em.employmentenddate < CURRENT_DATE THEN
             'S'
@@ -95,6 +105,7 @@ final AS (
     LEFT JOIN employment_details emd ON em.employeeid = emd.employeeid
     LEFT JOIN positions po ON emd.Position = po.positionid
     LEFT JOIN supervisor su ON em.employeeid = su.employeeid
+    LEFT JOIN company cp ON em.companyid = cp.companyid
 )
 
 

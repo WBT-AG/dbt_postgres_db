@@ -16,3 +16,4 @@ sources:
       - name: airbyte_site
       - name: airbyte_fixedcontrolitem
       - name: airbyte_vssmsupervisor
+      - name: airbyte_company
