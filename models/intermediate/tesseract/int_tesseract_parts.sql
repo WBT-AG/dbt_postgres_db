@@ -10,7 +10,6 @@ service_parts AS (
         sli.quantity,
         sli.cost,
         sli.charge,
-        sli.currency,
         cast(sli.invoice_date AS DATE)
     FROM service_line_items sli
 ),
