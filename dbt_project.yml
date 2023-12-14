@@ -52,6 +52,7 @@ models:
       +post-hook:
         sql: "SELECT pg_size_pretty(pg_database_size('merrychef-dw')) AS database_size;"
         transaction: false
+      +fqn_exclude: ['marts', 'service', 'claim_details']
 
     intermediate:
       +enabled: true
