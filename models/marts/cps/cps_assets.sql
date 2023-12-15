@@ -4,18 +4,15 @@ WITH staging_assets AS (
     FROM {{ ref('stg_salesforce__assets') }}
 ),
 
-staging_claims AS (
-        SELECT 
-        *
-    FROM {{ ref('stg_salesforce__claims') }}
-),
 
 final AS (
     SELECT 
         sa.*,
-        sc.model_number
+        {{  is_valid_serial_number('sa.serial_number') }} as has_valid_serial,
+        {{  serial_build_date('sa.serial_number') }} as build_date,
+        {{  serial_build_site('sa.serial_number') }} as build_site
+
     FROM staging_assets sa
-    JOIN staging_claims sc ON sa.serial_number = sc.serial_number
 )
 
 SELECT * from final
