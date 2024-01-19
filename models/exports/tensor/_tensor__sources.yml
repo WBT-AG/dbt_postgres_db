@@ -17,3 +17,11 @@ sources:
       - name: airbyte_fixedcontrolitem
       - name: airbyte_vssmsupervisor
       - name: airbyte_company
+      - name: airbyte_employeemisctext
+      - name: airbyte_employeemisctextitem
+  - name: imports
+    description: "Manual Imports"
+    database: merrychef-dw  
+    schema: imports  
+    tables:
+      - name: employee_locations

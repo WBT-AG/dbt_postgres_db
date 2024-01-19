@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: cps_service_assets
+  - name: cps_service_claim_line_items
+  - name: cps_service_claims

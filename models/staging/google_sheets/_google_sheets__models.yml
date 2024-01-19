@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: stg_google_sheets__th_rollout
+  - name: stg_google_sheets__th_tracker_data
+
+

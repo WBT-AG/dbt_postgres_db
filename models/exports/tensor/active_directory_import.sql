@@ -16,7 +16,8 @@ WITH employees AS (
 departments AS (
     SELECT 
         departmentid,
-        departmentcode
+        departmentcode,
+        description
     FROM {{ source('tensor', 'airbyte_department')}} 
 ),
 
@@ -77,17 +78,51 @@ supervisor AS (
     FROM {{ source('tensor', 'airbyte_vssmsupervisor')}} 
 ),
 
+misc_text AS (
+    SELECT
+        employeeid,
+        misccolumn,
+        employeemisctextitemid
+    FROM {{ source('tensor', 'airbyte_employeemisctext')}}
+    WHERE misccolumn = 10
+),
+
+misc_text_item AS (
+    SELECT
+        employeemisctextitemid,
+        misctext
+    FROM {{ source('tensor', 'airbyte_employeemisctextitem')}} 
+),
+
+employee_locations AS (
+    SELECT
+        location,
+        division,
+        office
+    FROM {{ source('imports', 'employee_locations')}} 
+),
+
+
 final AS (
     SELECT
+        em.employeeid as id,
         em.employeecode as EmployeeCode,
         em.firstname as FirstName,
         em.lastname as LastName,
         left(em.middlename,1) as MiddleInitial,
         po.jobtitle as JobTitle,
-        de.departmentcode,
-        su.supervisorid,
+        de.description as department,
+        mti.misctext as location,
+        LEFT(el.division, 4) as devision,
+        el.office,
+        --su.supervisorid,
         ed.knownas as preferredFirstName,
-        fi.controlvalue as AssignmentType,
+        CASE
+            WHEN fi.controlvalue like 'Full Time' OR fi.controlvalue = 'Part Time' THEN 'Employee'
+            WHEN fi.controlvalue like 'Temps -%' THEN 'Contingent'
+            ELSE fi.controlvalue
+        END as assignmenttype,
+        --fi.controlvalue as AssignmentType,
         si.sitecode as LocationCode,
         co.countrycode as CountryCode,
         cp.companyname as CompanyName,
@@ -104,8 +139,12 @@ final AS (
     LEFT JOIN fixedcontrolitem fi ON em.employmenttype = fi.fixedcontrolitemid
     LEFT JOIN employment_details emd ON em.employeeid = emd.employeeid
     LEFT JOIN positions po ON emd.Position = po.positionid
-    LEFT JOIN supervisor su ON em.employeeid = su.employeeid
+   -- LEFT JOIN supervisor su ON em.employeeid = su.employeeid
     LEFT JOIN company cp ON em.companyid = cp.companyid
+    LEFT JOIN misc_text mt ON em.employeeid = mt.employeeid
+    LEFT JOIN misc_text_item mti ON mt.employeemisctextitemid = mti.employeemisctextitemid
+    LEFT JOIN employee_locations el ON mti.misctext = el.location
+    ORDER BY id
 )
 
 

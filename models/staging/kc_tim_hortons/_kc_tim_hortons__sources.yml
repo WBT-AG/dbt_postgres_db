@@ -1,0 +1,12 @@
+
+version: 2
+
+sources:
+  - name: kc_tim_hortons
+    description: "KitchenConnect Tim Hortons Data"
+    database: merrychef-dw  
+    schema: kc_th
+    tables:
+      - name: airbyte_connectivity_status
+      - name: airbyte_devices
+      - name: airbyte_devices_softwareversion

@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: google_sheets
+    description: "todo"
+    database: merrychef-dw  
+    schema: google_sheets  
+    tables:
+      - name: airbyte_th_rollout
+      - name: airbyte_th_tracker_data

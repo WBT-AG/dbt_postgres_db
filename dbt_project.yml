@@ -63,6 +63,11 @@ models:
       +enabled: true
       +materialized: table
       +schema: exports
-      
+    
+    service_data:
+      +enabled: true
+      +materialized: table
+      +schema: service_data      
+
 
 
