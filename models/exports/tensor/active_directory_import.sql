@@ -10,7 +10,8 @@ WITH employees AS (
         employmenttype,
         companyid,
         employeecode
-    FROM {{ source('tensor', 'airbyte_employee')}} 
+    FROM {{ source('tensor', 'airbyte_employee')}}
+    WHERE employeecode::text ~ '^[0-9]+$' -- drops all employee that contain letters
 ),
 
 departments AS (
