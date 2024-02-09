@@ -74,9 +74,11 @@ company AS (
 
 supervisor AS (
     SELECT
-        employeeid,
-        supervisorid
-    FROM {{ source('tensor', 'airbyte_vssmsupervisor')}} 
+        sv.employeeid,
+        sv.supvemployeeid,
+        e.employeecode as supervisorcode
+    FROM {{ source('tensor', 'airbyte_supervision')}} sv
+    LEFT JOIN employees e ON sv.supvemployeeid = e.employeeid
 ),
 
 misc_text AS (
@@ -116,7 +118,7 @@ final AS (
         mti.misctext as location,
         LEFT(el.division, 4) as devision,
         el.office,
-        --su.supervisorid,
+        su.supervisorcode,
         ed.knownas as preferredFirstName,
         CASE
             WHEN fi.controlvalue like 'Full Time' OR fi.controlvalue = 'Part Time' THEN 'Employee'
@@ -140,7 +142,7 @@ final AS (
     LEFT JOIN fixedcontrolitem fi ON em.employmenttype = fi.fixedcontrolitemid
     LEFT JOIN employment_details emd ON em.employeeid = emd.employeeid
     LEFT JOIN positions po ON emd.Position = po.positionid
-   -- LEFT JOIN supervisor su ON em.employeeid = su.employeeid
+    LEFT JOIN supervisor su ON em.employeeid = su.employeeid
     LEFT JOIN company cp ON em.companyid = cp.companyid
     LEFT JOIN misc_text mt ON em.employeeid = mt.employeeid
     LEFT JOIN misc_text_item mti ON mt.employeemisctextitemid = mti.employeemisctextitemid

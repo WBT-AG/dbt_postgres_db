@@ -15,7 +15,7 @@ sources:
       - name: airbyte_position
       - name: airbyte_site
       - name: airbyte_fixedcontrolitem
-      - name: airbyte_vssmsupervisor
+      - name: airbyte_supervision
       - name: airbyte_company
       - name: airbyte_employeemisctext
       - name: airbyte_employeemisctextitem
