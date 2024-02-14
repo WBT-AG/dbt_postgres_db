@@ -1,9 +1,9 @@
 version: 2
 
 models:
-#  - name: stg_kc_tim_hortons__connectivity_status
- #   columns:
-#      - name: device_id
+  - name: stg_kc_tim_hortons__connectivity_status
+    columns:
+      - name: device_id
   - name: stg_kc_tim_hortons__software_versions
     columns:
       - name: device_hashid

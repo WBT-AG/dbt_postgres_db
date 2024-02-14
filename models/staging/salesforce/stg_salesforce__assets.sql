@@ -10,6 +10,7 @@ final AS (
     --a.asset_item_sku__c as sku,
     a.asset_description__c as description,
     a.asset_serial_number__c as serial_number,
+    a.asset_item_number__c as model_number,
     a.original_install_date__c as original_install_date,
     a.gpl_description__c as gpl_description,
     a."Id" as asset_id

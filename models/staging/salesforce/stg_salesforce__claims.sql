@@ -20,7 +20,7 @@ final AS (
         sc.asset_location_type__c as asset_location_type,
         sc.authorized_by__c as authorised_by,
         sc.business_individual__c as business_individual,
-        sc.claim_type__c as calim_type,
+        sc.claim_type__c as claim_type,
         sc.causal_part_added__c as causal_part_added,
         sc.chain_name__c as chain_name,
         sc.charge_type__c as charge_type,
