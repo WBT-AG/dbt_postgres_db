@@ -7,6 +7,7 @@ WITH employees AS (
         departmentid,
         siteid,
         employmentenddate,
+        employmentstartdate,
         employmenttype,
         companyid,
         employeecode
@@ -133,7 +134,9 @@ final AS (
             WHEN em.employmentenddate < CURRENT_DATE THEN
             'S'
             ELSE 'A' 
-        END as activeemployee
+        END as activeemployee,
+        DATE(em.employmentstartdate) as EmploymentStartDate,
+        DATE(em.employmentenddate) as EmploymentEndDate
     FROM employees em
     LEFT JOIN departments de ON em.departmentid = de.departmentid
     LEFT JOIN employee_details ed ON em.employeeid = ed.employeeid
