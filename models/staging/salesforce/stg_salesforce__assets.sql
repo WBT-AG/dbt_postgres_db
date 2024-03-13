@@ -15,7 +15,7 @@ final AS (
     UPPER(a.gpl_description__c) as gpl_description,
     a."Id" as asset_id,
     a.original_install_date__c as install_date,
-    a.sold_to_ship_country__c as sold_to_country_code
+    a.sold_to_ship_to_country__c  as sold_to_country_code
     FROM assets a
     WHERE a.brandtext__c = 'Merrychef' OR a.brandtext__c = 'MERRYCHEF'
 )
