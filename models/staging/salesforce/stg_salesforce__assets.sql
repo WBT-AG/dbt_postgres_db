@@ -15,7 +15,10 @@ final AS (
     UPPER(a.gpl_description__c) as gpl_description,
     a."Id" as asset_id,
     a.original_install_date__c as install_date,
-    a.sold_to_ship_to_country__c  as sold_to_country_code
+    a.sold_to_ship_to_country__c  as sold_to_country_code,
+    {{  serial_build_date('a.asset_serial_number__c') }} as build_date,
+    {{  serial_build_site('a.asset_serial_number__c') }} as build_site,
+    {{  get_model_range('a.asset_item_number__c') }} as model_range
     FROM assets a
     WHERE a.brandtext__c = 'Merrychef' OR a.brandtext__c = 'MERRYCHEF'
 )

@@ -8,8 +8,6 @@ WITH staging_assets AS (
 final AS (
     SELECT 
 *,
-        {{  serial_build_date('sa.serial_number') }} as build_date,
-        {{  serial_build_site('sa.serial_number') }} as build_site,
         {{  extract_model_range('sa.model_number') }} as range,
         {{  extract_model_variant('sa.model_number') }} as variant,
         {{  extract_voltage('sa.model_number') }} as voltage,
