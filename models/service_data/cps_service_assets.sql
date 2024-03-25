@@ -8,7 +8,6 @@ WITH staging_assets AS (
 final AS (
     SELECT 
 *,
-        {{  extract_model_range('sa.model_number') }} as range,
         {{  extract_model_variant('sa.model_number') }} as variant,
         {{  extract_voltage('sa.model_number') }} as voltage,
         {{  extract_model_customer('sa.model_number') }} as model_customer,
