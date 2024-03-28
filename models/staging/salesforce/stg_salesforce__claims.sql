@@ -2,6 +2,14 @@ WITH salesforce_claims AS (
     SELECT * FROM {{ source('salesforce', 'airbyte_claim__c')}} 
 ),
 
+salesforce_assets AS (
+    SELECT
+        serial_number, 
+        install_date,
+        build_date
+    FROM {{ ref('stg_salesforce__assets') }}
+),
+
 final AS (
     SELECT
         sc.account__c as account,
@@ -142,8 +150,37 @@ final AS (
                 THEN sc.serial_search__c
                 ELSE NULL
             END as VARCHAR
-        ) as serial_number_cleaned
+        ) as serial_number_cleaned,
+        -- Calculate age_at_failure in years
+        CASE 
+            WHEN sa.build_date IS NOT NULL AND sc.failure_date__c IS NOT NULL 
+            THEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.build_date)
+            ELSE NULL 
+        END AS age_at_failure_years,
+        -- Calculate service_age_at_failure in years
+        CASE 
+            WHEN sa.install_date IS NOT NULL AND sc.failure_date__c IS NOT NULL 
+            THEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.install_date)
+            ELSE NULL 
+        END AS service_age_at_failure_years,
+        -- Grouping service_age_at_failure
+        CASE
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.install_date) <= 1 THEN '<1 Year'
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.install_date) BETWEEN 1 AND 3 THEN '1-3 Years'
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.install_date) BETWEEN 4 AND 5 THEN '4-5 Years'
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.install_date) >= 6 THEN '6 Years+'
+            ELSE NULL
+        END AS service_age_at_failure_group,
+        -- Grouping age_at_failure
+        CASE
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.build_date) < 1 THEN '<1 Year'
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.build_date) BETWEEN 1 AND 3 THEN '1-3 Years'
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.build_date) BETWEEN 4 AND 5 THEN '4-5 Years'
+            WHEN EXTRACT(YEAR FROM sc.failure_date__c) - EXTRACT(YEAR FROM sa.build_date) >= 6 THEN '6 Years+'
+            ELSE NULL
+        END AS age_at_failure_group
     FROM salesforce_claims sc
+    LEFT JOIN salesforce_assets sa ON sa.serial_number = sc.serial_search__c
     WHERE sc.welbilt_asset_brand__c = 'MERRYCHEF' OR sc.welbilt_asset_brand__c = 'Merrychef'
 )
 
